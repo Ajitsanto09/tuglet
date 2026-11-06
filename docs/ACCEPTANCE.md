@@ -1,4 +1,4 @@
-# Acceptance record: Tuglet for Mac 0.2.0
+# Acceptance record: Tuglet for Mac 0.2.x
 
 Recorded 6 November 2026 on macOS 15.7.9 (Apple silicon), Swift 6.2.4 (Command Line Tools 26.3).
 
@@ -20,9 +20,13 @@ Recorded 6 November 2026 on macOS 15.7.9 (Apple silicon), Swift 6.2.4 (Command L
 | Full pull (130 pt) completes; short pull (40 pt) snoozes; tiny pull (15 pt) does nothing | Pass | Pointer events posted by a test helper; data file afterwards: completed / snoozed / due |
 | Window returns to normal size after a pull | Pass | 276×280 pt after the drags |
 | Pull distance unaffected by the window growing when a drag starts | Pass (after fix) | First run measured a 150 pt pull as a snooze; now measured from the pointer's screen position |
+| 0.2.1: first launch with no reminders opens the Tuglet window | Pass | 360×588 pt window on screen |
+| 0.2.1: launch with existing reminders stays quiet (Pip only) | Pass | Only the Pip panel on screen |
+| 0.2.1: double-click while running reopens the window | Pass | `open` on the running app showed the window |
+| 0.2.1: clicking idle Pip opens the window | Pass | Posted click on Pip |
 | Rendered views (light and dark): due card, pulling labels, menu | Pass | `docs/screenshots/` from `Tuglet --snapshots` |
 
-Bugs found and fixed during these checks: the "Let go to…" label shifted Pip and was clipped in the narrow idle window; card buttons were truncated; pulls were mismeasured when the window resized; a cancelled drag could leave Pip stuck in dragging mode.
+Found by a teammate after 0.2.0 shipped and fixed in 0.2.1: double-clicking appeared to do nothing (menu bar icon hidden behind the notch, no window). Bugs found and fixed during these checks: the "Let go to…" label shifted Pip and was clipped in the narrow idle window; card buttons were truncated; pulls were mismeasured when the window resized; a cancelled drag could leave Pip stuck in dragging mode.
 
 ## Manual checks still to do
 

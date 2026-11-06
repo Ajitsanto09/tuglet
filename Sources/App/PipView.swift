@@ -77,7 +77,9 @@ struct PipView: View {
                 }
             .contentShape(Rectangle())
             .gesture(pull)
-            .onTapGesture { if current != nil { ui.collapsed.toggle() } }
+            .onTapGesture {
+                if current != nil { ui.collapsed.toggle() } else { NSApp.sendAction(#selector(AppDelegate.showMain), to: nil, from: nil) }
+            }
         }
         .frame(width: PipLayout.pip)
         .rotationEffect(.degrees(angle), anchor: .top)

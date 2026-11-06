@@ -8,7 +8,7 @@ A little Mac app for personal reminders. **Pip**, a friendly star on a string, h
 
 Reminders stay on your Mac. No account, no internet connection, no tracking.
 
-> 🚧 **First version (0.2.0).** This is the first iteration of the Mac app. More updates are coming soon: editing, repeating reminders, more characters, and optional Slack/GitHub notifications. Feedback is very welcome.
+> 🚧 **First version (0.2.x).** This is the first iteration of the Mac app. More updates are coming soon: editing, repeating reminders, more characters, and optional Slack/GitHub notifications. Feedback is very welcome.
 
 | Reminder due | Pulling to complete | Menu bar |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Reminders stay on your Mac. No account, no internet connection, no tracking.
 
 **→ [Download and install guide for teammates](docs/INSTALL.md)**. It covers the download, the one-time **Open Anyway** step, and how to use Pip.
 
-Quick version: download **`Tuglet-x.y.z-mac.zip`** from **[Releases](https://github.com/Ajitsanto09/tuglet/releases/latest)** (not the green Code button), move Tuglet to Applications, open it, and approve it once in **System Settings → Privacy & Security → Open Anyway**. Needs macOS 13 or newer, on Apple silicon or Intel.
+Quick version: download **`Tuglet-x.y.z-mac.zip`** from **[Releases](https://github.com/Ajitsanto09/tuglet/releases/latest)** (not the green Code button), move Tuglet to Applications, open it, and approve it once in **System Settings → Privacy & Security → Open Anyway**. Double-click Tuglet any time to open its window. Needs macOS 13 or newer, on Apple silicon or Intel.
 
 Why the extra step? The app is signed for free instead of through Apple's paid developer program, so macOS asks you to approve it once. Details are in the [install guide](docs/INSTALL.md#3-the-one-time-open-anyway-step-why-its-needed).
 

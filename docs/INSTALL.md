@@ -1,6 +1,6 @@
 # Install and use Tuglet on your Mac
 
-> **This is the first version of Tuglet (0.2.0).** It does the basics: reminders, Pip, snooze and complete. More updates are coming soon. Ideas and problems are very welcome; see "Tell us what you think" at the end.
+> **This is the first version of Tuglet (0.2.x).** It does the basics: reminders, Pip, snooze and complete. More updates are coming soon. Ideas and problems are very welcome; see "Tell us what you think" at the end.
 
 You don't need to know how to code. This takes about 5 minutes.
 
@@ -11,13 +11,13 @@ You don't need to know how to code. This takes about 5 minutes.
 ## 1. Download
 
 1. Open **https://github.com/Ajitsanto09/tuglet/releases/latest**. The repository is private, so sign in to GitHub with an account that has access. If you get a "404" page, ask the maintainer to add you.
-2. Under **Assets**, click **`Tuglet-0.2.0-mac.zip`**.
+2. Under **Assets**, click the file named **`Tuglet-<version>-mac.zip`** (for example `Tuglet-0.2.1-mac.zip`).
 
    ⚠️ Don't use "Source code (zip)" or the green **Code → Download ZIP** button. Those are the project's code, not the app.
 
 3. Your Mac usually unzips it for you. In **Downloads** you should now see **Tuglet** (an app with a star icon). If you only see the `.zip`, double-click it.
 
-*Optional, for the careful:* check the download wasn't damaged. Open **Terminal** and run `shasum -a 256 ~/Downloads/Tuglet-0.2.0-mac.zip`. The result should match the line in the release's `SHA256SUMS` file.
+*Optional, for the careful:* check the download wasn't damaged. Open **Terminal** and run `shasum -a 256 ~/Downloads/Tuglet-0.2.1-mac.zip` (use the version you downloaded). The result should match the line in the release's `SHA256SUMS` file.
 
 ## 2. Move it to Applications
 
@@ -35,7 +35,7 @@ Apple shows a warning for apps that weren't registered with Apple through its pa
 4. Scroll down to the **Security** section. You'll see **"Tuglet" was blocked to protect your Mac.** Click **Open Anyway**.
    (The button only appears for about an hour after step 2. If it's missing, repeat step 1.)
 5. Click **Open Anyway** again in the pop-up and enter your Mac password (or use Touch ID).
-6. Tuglet opens. From now on it opens normally, with no more warnings.
+6. Tuglet opens and shows its window. From now on it opens normally, with no more warnings.
 
 ### On macOS 13 Ventura or 14 Sonoma
 
@@ -48,12 +48,17 @@ If that warning has no Open button, use the System Settings → Privacy & Securi
 
 ## 4. Find Tuglet
 
-Tuglet lives in the **menu bar** at the top right of your screen, as a small **☆ star**. It has no Dock icon and no window to close.
+The first time Tuglet opens, its **Tuglet window** appears with a short welcome from Pip. That's where you add reminders.
 
-- **☆** means nothing is due. **★ 2** means 2 reminders are due.
-- Click the star to open the Tuglet menu.
+After that, Tuglet works quietly in the background:
 
-Can't see the star? If your menu bar is crowded, macOS may hide some icons behind the notch or other icons. Quit a few menu bar apps, or hold ⌘ and drag icons to make room.
+- **In the menu bar** at the top right of your screen, as a small **☆ star** (**★ 2** means 2 reminders are due). Click it to open the same reminder list.
+- **Double-click Tuglet in Applications any time** to bring the Tuglet window back, even while it's running.
+- **Click Pip** when nothing is due to open the window too.
+
+Tuglet has no Dock icon. Closing the window doesn't quit it.
+
+**Can't see the ☆?** On MacBooks with a camera notch, a full menu bar can hide icons behind the notch. Tuglet still works. Double-click it in Applications instead, or make room by quitting other menu bar apps (or hold ⌘ and drag other icons off the menu bar).
 
 **Turn on "Open Tuglet when I log in"** (Tuglet menu → Settings) so your reminders work after every restart. Tuglet can only remind you while it's running.
 
@@ -63,7 +68,7 @@ Can't see the star? If your menu bar is crowded, macOS may hide some icons behin
 
 ### Add a reminder
 
-1. Click the **☆** in the menu bar.
+1. Open the **Tuglet window** (double-click Tuglet in Applications) or click the **☆** in the menu bar.
 2. Type what you want to remember, for example *"Check the release smoke test"*.
 3. Pick a time, or click a shortcut: **In 5 min**, **In 15 min**, **In 30 min**, **In 60 min**.
 4. Click **Add reminder**, or press Return.
@@ -108,9 +113,9 @@ Pip shows them one at a time, oldest first ("1 of 3 due"). Complete or snooze on
 
 ### Change or remove a reminder
 
-Open the Tuglet menu. Under **Coming up**, click **Delete**, then **Confirm delete**. To change a time, delete it and add it again. (Editing is planned for a future update.)
+Open the Tuglet window or menu. Under **Coming up**, click **Delete**, then **Confirm delete**. To change a time, delete it and add it again. (Editing is planned for a future update.)
 
-### Settings (in the Tuglet menu)
+### Settings (in the Tuglet window or menu)
 
 - **Snooze for:** 5, 10, 15 or 30 minutes.
 - **Pip hangs on the:** right or left side of the screen.
@@ -153,8 +158,9 @@ Your reminders are kept. They're stored separately from the app.
 | "Tuglet" Not Opened / can't be opened | Do the **Open Anyway** step (section 3). |
 | No **Open Anyway** button in Privacy & Security | Double-click Tuglet again first; the button appears for about an hour afterwards. |
 | "Tuglet is damaged and can't be opened" | The download was probably corrupted. Delete it, download again, and check the checksum. |
-| I downloaded a folder called `tuglet-main` | That's the source code. Download **`Tuglet-0.2.0-mac.zip`** from the Releases page instead. |
-| I can't see the ☆ in the menu bar | It may be hidden behind the notch or other icons. Close other menu bar apps, or open Tuglet again from Applications. |
+| I downloaded a folder called `tuglet-main` | That's the source code. Download **`Tuglet-<version>-mac.zip`** from the Releases page instead. |
+| I double-click Tuglet and nothing seems to happen | Update to 0.2.1 or newer: it opens the Tuglet window. In 0.2.0, Tuglet was running but only in the menu bar, often hidden behind the notch. |
+| I can't see the ☆ in the menu bar | It's probably hidden behind the camera notch. Double-click Tuglet in Applications to open its window, or quit other menu bar apps to make room. |
 | Pip doesn't appear | Pip only shows when you have reminders. Add one, or try the 1-minute demo. |
 | Reminder came late | Your Mac was asleep or Tuglet wasn't running. Turn on "Open Tuglet when I log in". |
 | Pip is in the way | Click **Hide**, move Pip to the left side in Settings, or snooze. |

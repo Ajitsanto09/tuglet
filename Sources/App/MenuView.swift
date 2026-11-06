@@ -20,6 +20,14 @@ struct MenuView: View {
                     Text("Version \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev") · first version, more coming soon")
                         .font(.caption).foregroundColor(.secondary)
                 }
+                if model.reminders.items.isEmpty {
+                    Text("Hi, I'm Pip! ⭐️ Add your first reminder below. I'll hang from the top of your screen and swing when it's due.\n\nI also live in the menu bar as ☆. If you can't see it, your menu bar may be full and the star hidden behind the camera notch. You can always double-click Tuglet in Applications to come back here.")
+                        .font(.callout)
+                        .padding(10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(Color.yellow.opacity(0.18)))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 if let problem = model.problem { Text(problem).foregroundColor(.red).fixedSize(horizontal: false, vertical: true) }
                 if let error { Text(error).foregroundColor(.red).fixedSize(horizontal: false, vertical: true) }
                 if let u = model.undoable {

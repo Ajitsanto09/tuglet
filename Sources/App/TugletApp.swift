@@ -30,6 +30,7 @@ struct MenuBarLabel: View {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let model = Model()
     private var pip: PipWindowController?
+    private var window: NSWindow?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         if let dir = CommandLine.arguments.firstIndex(of: "--snapshots").map({ CommandLine.arguments[$0 + 1] }) {
@@ -38,5 +39,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         pip = PipWindowController(model: model)
+        // New users have no reminders yet, so Pip is hidden and the menu bar star may sit behind the notch.
+        if model.reminders.items.isEmpty { showMain() }
+    }
+
+    /// Double-clicking Tuglet while it's already running.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        showMain()
+        return false
+    }
+
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
+
+    /// The same content as the menu bar menu, in an ordinary window that is always reachable.
+    @objc func showMain() {
+        if window == nil {
+            let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 360, height: 560),
+                             styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
+            w.title = "Tuglet"
+            w.isReleasedWhenClosed = false
+            w.contentView = NSHostingView(rootView: MenuView(model: model))
+            w.center()
+            window = w
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        window?.makeKeyAndOrderFront(nil)
     }
 }

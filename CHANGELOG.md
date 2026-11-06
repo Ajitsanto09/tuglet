@@ -2,6 +2,13 @@
 
 All notable changes to Tuglet are recorded here. The version is `CFBundleShortVersionString` in `Resources/Info.plist`.
 
+## [0.2.1] - 2026-11-06
+
+### Fixed
+- Double-clicking Tuglet now always opens the **Tuglet window** (reminders, add form, settings). In 0.2.0 nothing seemed to happen: the app ran only in the menu bar, where a full menu bar can hide the ☆ behind the camera notch.
+- The first launch shows the window with a short welcome from Pip.
+- Clicking Pip when nothing is due opens the window.
+
 ## [0.2.0] - 2026-11-06
 
 **Tuglet is now a Mac app.** This is the first iteration of the Mac version; more updates are coming.
