@@ -108,6 +108,8 @@ The change is instant. Everything works the same whichever character you pick; t
 
 While you pull, a label next to Pip says **"Let go to snooze"** or **"Let go to complete"**, so you always know what will happen before you let go.
 
+**What it feels like:** the rope fights back. The further you pull, the tighter it gets, and Pip stretches out. When Pip starts to **tremble**, you've pulled far enough to complete. Let go and Pip **snaps back up** with a **flash**: gold for done, blue for snoozed. Changed your mind? Move back up before letting go; there's no flash and nothing changes.
+
 ### Or just click
 
 Prefer not to drag? Use the buttons on the card under Pip, or in the Tuglet menu:

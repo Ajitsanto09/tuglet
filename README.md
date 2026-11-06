@@ -4,8 +4,10 @@ A little Mac app for personal reminders. **Pip**, a friendly star on a string (o
 
 ![Pip, a cat, a fox, a robot, a space invader, a laptop and a coffee cup hanging on ropes](docs/screenshots/lineup-light.png)
 
+![The release flash: a gold burst for complete and a blue one for snooze](docs/screenshots/flash-dark.png)
+
 - **Pull Pip a little** and let go: **snooze** (5 minutes by default).
-- **Pull Pip all the way down** and let go: **complete**. Undo is available for 10 seconds.
+- **Pull Pip all the way down** (the rope fights back, and Pip trembles when you're there) and let go: **complete**, with an anime-style flash. Undo is available for 10 seconds.
 - Prefer clicking? **Snooze** and **Complete** buttons sit right under Pip and in the menu bar.
 
 Reminders stay on your Mac. No account, no internet connection, no tracking.

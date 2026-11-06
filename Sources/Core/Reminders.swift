@@ -6,7 +6,7 @@ import Foundation
 public let snoozeThreshold: Double = 24
 /// Downward drag needed to complete on release.
 public let completeThreshold: Double = 120
-/// The rope stretches visually up to here; classification uses the real distance.
+/// The rope can stretch visually up to here; classification uses the real distance.
 public let maxStretch: Double = 180
 
 public enum PullAction: Equatable { case snooze, complete }
@@ -18,7 +18,12 @@ public func classifyPull(_ dy: Double) -> PullAction? {
     return nil
 }
 
-public func visualStretch(_ dy: Double) -> Double { min(maxStretch, max(0, dy.isNaN ? 0 : dy)) }
+/// How far the rope visibly stretches for a pull of `dy`: it resists more the further you pull,
+/// so the character lags behind the pointer like a taut spring (never reaching `maxStretch`).
+public func visualStretch(_ dy: Double) -> Double {
+    guard dy > 0 else { return 0 } // also NaN
+    return maxStretch * (1 - exp(-dy / 150))
+}
 
 // MARK: - Model
 

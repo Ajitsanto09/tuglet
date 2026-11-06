@@ -23,6 +23,8 @@ final class PipUI: ObservableObject {
     @Published var armed: PullAction?
     /// True while an attention animation plays (the window makes room for it).
     @Published var swinging = false
+    /// True briefly after a release, while the rope snaps back and the flash plays.
+    @Published var settling = false
 }
 
 struct PipView: View {
@@ -32,6 +34,9 @@ struct PipView: View {
     @State private var pinned: UUID?
     @State private var drop: CGFloat = 0
     @State private var scale: CGFloat = 1
+    @State private var jitter: CGFloat = 0
+    @State private var flash: (complete: Bool, progress: Double)?
+    @State private var flashLit = false
     @State private var startY: CGFloat = 0
     /// Resets on end *and* on cancel (onEnded isn't called when macOS cancels a drag).
     @GestureState private var pressing = false
@@ -39,6 +44,8 @@ struct PipView: View {
     private var settings: Settings { model.reminders.settings }
     private var current: Reminder? { model.current }
     private var alignment: HorizontalAlignment { settings.side == .right ? .trailing : .leading }
+    /// 0 (slack) … 1 (as taut as it gets).
+    private var tension: Double { Double(ui.stretch) / maxStretch }
     private var reduceMotion: Bool { settings.pauseAnimation || NSWorkspace.shared.accessibilityDisplayShouldReduceMotion }
 
     var body: some View {
@@ -58,10 +65,21 @@ struct PipView: View {
 
     private var hanging: some View {
         VStack(spacing: -3) {
-            Rectangle().fill(Color(red: 0.48, green: 0.35, blue: 0.18)).frame(width: 2, height: PipLayout.rope + ui.stretch + drop)
+            Rectangle().fill(tension > 0.5 ? Color(red: 0.62, green: 0.42, blue: 0.16) : Color(red: 0.48, green: 0.35, blue: 0.18))
+                .frame(width: 2 + 2 * tension, height: PipLayout.rope + ui.stretch + drop)
                 .shadow(color: .white.opacity(0.6), radius: 0.5)
             AvatarView(avatar: Avatar.find(settings.avatar)).frame(width: PipLayout.pip, height: PipLayout.pip)
                 .scaleEffect(scale, anchor: .top)
+                // Strain: stretched tall and thin by the pull, trembling once it's ready to complete.
+                .scaleEffect(x: 1 - 0.1 * tension, y: 1 + 0.18 * tension, anchor: .top)
+                .offset(x: jitter)
+                .brightness(flashLit ? 0.55 : 0)
+                .overlay {
+                    if let flash {
+                        FlashBurst(progress: flash.progress, complete: flash.complete)
+                            .frame(width: PipLayout.pip + 2 * PipLayout.swingRoom - 4, height: PipLayout.pip + 2 * PipLayout.swingRoom - 4)
+                    }
+                }
                 // Overlays don't change layout, so Pip never shifts while the label shows.
                 .overlay(alignment: .topTrailing) {
                     if !model.due.isEmpty {
@@ -108,20 +126,51 @@ struct PipView: View {
                 let dy = Double(startY - NSEvent.mouseLocation.y) // screen y grows upward
                 ui.stretch = CGFloat(visualStretch(dy))
                 ui.armed = classifyPull(dy)
+                jitter = ui.armed == .complete && !reduceMotion ? CGFloat.random(in: -2.5...2.5) : 0
             }
             .onEnded { _ in
                 let dy = Double(startY - NSEvent.mouseLocation.y)
-                defer { cancelDrag() }
+                defer { cancelDrag(snap: true) }
                 guard ui.dragging, let id = pinned, id == current?.id, let action = classifyPull(dy) else { return }
-                _ = action == .complete ? model.complete(id) : model.snooze(id)
+                let failed = (action == .complete ? model.complete(id) : model.snooze(id)) != nil
+                if !failed { burst(complete: action == .complete) } // only celebrate what was actually saved
             }
     }
 
-    private func cancelDrag() {
-        withAnimation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.6)) { ui.stretch = 0 }
+    /// `snap`: a released rope whips back past its rest point and wobbles (a cancel just eases back).
+    private func cancelDrag(snap: Bool = false) {
+        let wasStretched = ui.stretch > 0
+        if snap && wasStretched && !reduceMotion { settle(for: 0.8) }
+        withAnimation(reduceMotion ? nil : snap ? .spring(response: 0.32, dampingFraction: 0.42) : .spring(response: 0.3, dampingFraction: 0.7)) {
+            ui.stretch = 0
+        }
         ui.dragging = false
         ui.armed = nil
         pinned = nil
+        jitter = 0
+    }
+
+    /// Keeps the window large while the snap-back and flash play, so nothing is clipped.
+    private func settle(for seconds: Double) {
+        ui.settling = true
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+            ui.settling = false
+        }
+    }
+
+    /// The anime "flash" on a successful pull: the character lights up and a burst shoots out.
+    private func burst(complete: Bool) {
+        guard !reduceMotion else { return }
+        settle(for: 0.8)
+        flash = (complete, 0)
+        flashLit = true
+        withAnimation(.easeOut(duration: 0.12)) { flashLit = false }
+        withAnimation(.easeOut(duration: complete ? 0.55 : 0.4)) { flash = (complete, 1) }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 600_000_000)
+            flash = nil
+        }
     }
 
     /// Grabs attention when a reminder becomes due: a drop-and-bounce, a big swing, then a short

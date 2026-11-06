@@ -36,7 +36,7 @@ The version lives in `Resources/Info.plist` (`CFBundleShortVersionString`) and m
 ## Code map
 
 ```
-Sources/Core/Reminders.swift   Pure logic, no UI: pull thresholds (24 / 120 / 180 pt), reminder
+Sources/Core/Reminders.swift   Pure logic, no UI: pull thresholds (24 / 120 pt), rope resistance curve, reminder
                                transitions, ordering, undo, history cap, and the JSON file it saves to.
 Sources/App/Model.swift        Owns state on the main thread. Every change is saved first and only
                                then shown. Sleeps until the next due time; catches up on wake,
@@ -47,6 +47,7 @@ Sources/App/PipView.swift      Rope, character, due badge, pull gesture, attenti
                                45-second shake) and the card.
 Sources/App/Avatars.swift      Character list (Pip + emoji animals/computer), how each is drawn, and the picker.
 Sources/App/PipArt.swift       Pip's own drawing.
+Sources/App/Effects.swift      The anime-style release flash.
 Sources/App/MenuView.swift     Menu bar window: due, add, coming up, settings, help.
 Sources/App/Snapshots.swift    Renders the README images.
 Checks/main.swift              Self-checks for Sources/Core.

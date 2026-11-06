@@ -20,7 +20,9 @@ check(classifyPull(119.9) == .snooze, "119.9 snoozes")
 check(classifyPull(120) == .complete, "120 completes")
 check(classifyPull(-40) == nil, "upward drag cancels")
 check(classifyPull(.nan) == nil, "NaN cancels")
-check(visualStretch(500) == maxStretch && visualStretch(-5) == 0, "stretch clamps")
+check(visualStretch(-5) == 0 && visualStretch(.nan) == 0 && visualStretch(0) == 0, "no stretch for upward/none")
+check(visualStretch(500) < maxStretch && visualStretch(10_000) <= maxStretch, "stretch never exceeds the maximum")
+check(visualStretch(60) < visualStretch(120) && visualStretch(120) < 120, "rope resists: grows, but less than the pointer")
 
 // Creation validation
 var r = Reminders()

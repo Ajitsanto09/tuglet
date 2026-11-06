@@ -50,6 +50,16 @@ enum Snapshots {
                 }
             }
             render(lineup, "lineup", CGSize(width: 600, height: 130), dark: dark)
+            let flashes = HStack(spacing: 24) {
+                ForEach([true, false], id: \.self) { complete in
+                    ZStack {
+                        AvatarView(avatar: Avatar.find(complete ? "pip" : "cat")).frame(width: 64, height: 64).brightness(0.25)
+                        FlashBurst(progress: 0.3, complete: complete).frame(width: 140, height: 140)
+                    }
+                    .frame(width: 140, height: 140)
+                }
+            }
+            render(flashes, "flash", CGSize(width: 330, height: 150), dark: dark)
         }
         try? FileManager.default.removeItem(at: file.url)
     }

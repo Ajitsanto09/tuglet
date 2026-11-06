@@ -11,6 +11,9 @@ First version of **characters**.
 
 ### Changed
 - **Livelier attention animation.** When a reminder becomes due, the character drops on its rope and bounces back, then swings hard with a quick "pop". While the reminder stays due, it gives a short shake every 45 seconds until you snooze or complete it. "Keep the character still" and macOS Reduce motion turn all movement off.
+- **More dramatic pull.** The rope resists: the further you pull, the harder it gets, the rope thickens, and the character stretches tall and thin. Past the "complete" point it trembles. Let go and it **snaps back** past its resting point and wobbles.
+- **Anime-style flash** on a successful pull: the character lights up and a burst of speed lines and a shock ring shoots out (gold for complete, blue for snooze). No flash when a pull is cancelled or a save fails, or with "Keep the character still" or Reduce motion.
+- The snooze and complete distances are unchanged (24 pt and 120 pt of pointer movement); only the visuals changed.
 - The character sits a little further from the screen edge so its swing isn't cut off.
 
 ### Compatibility
