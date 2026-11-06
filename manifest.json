@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Tuglet",
+  "version": "0.1.0",
+  "description": "A hanging reminder companion. Small pull to snooze; full pull to complete.",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "alarms", "scripting", "activeTab"],
+  "optional_permissions": ["notifications"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tuglet reminders",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png" }
+  },
+  "options_page": "options.html",
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'self';"
+  },
+  "incognito": "not_allowed"
+}
