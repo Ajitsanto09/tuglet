@@ -109,6 +109,11 @@ check({ do { _ = try file.load(); return false } catch { return (error as? Stora
 try! Data("garbage".utf8).write(to: file.url)
 check({ do { _ = try file.load(); return false } catch { return (error as? StorageError) == .unreadable } }(), "corrupt refused")
 check((try? String(contentsOf: file.url, encoding: .utf8)) == "garbage", "corrupt file left untouched")
+// A 0.2.x file (no avatar setting) still loads, with the default character
+let old = #"{"schemaVersion":1,"items":[],"settings":{"snoozeMinutes":10,"side":"left","pauseAnimation":false,"showTitleOnPip":true}}"#
+try! Data(old.utf8).write(to: file.url)
+let upgraded = try? file.load()
+check(upgraded?.settings.avatar == "pip" && upgraded?.settings.snoozeMinutes == 10 && upgraded?.settings.side == .left, "0.2.x settings load with default avatar")
 try? FileManager.default.removeItem(at: dir)
 
 print("\(passes) checks passed, \(failures) failed")

@@ -38,10 +38,10 @@ final class PipWindowController {
         let visible = model.hasAnything || model.status != nil || model.problem != nil
         guard visible, let screen = NSScreen.screens.first else { panel.orderOut(nil); return }
         let panelShown = (model.current != nil && !ui.collapsed) || model.status != nil || model.problem != nil
-        let width = panelShown || ui.dragging ? PipLayout.panelWidth : PipLayout.pip + 8 // room for the "Let go to…" label
+        let width = panelShown || ui.dragging ? PipLayout.panelWidth : PipLayout.pip + 2 * PipLayout.swingRoom // room for the "Let go to…" label and swings
         // While dragging, reserve the full stretch so the window doesn't resize under the pointer.
         let stretch = ui.dragging ? CGFloat(maxStretch) : ui.stretch
-        let height = PipLayout.rope + stretch + PipLayout.pip + (panelShown ? PipLayout.panelHeight : 0) + 24
+        let height = PipLayout.rope + stretch + PipLayout.pip + (panelShown ? PipLayout.panelHeight : 0) + 24 + (ui.swinging ? PipLayout.bounce + 16 : 0)
         let area = screen.visibleFrame // just below the menu bar
         let x = model.reminders.settings.side == .right ? area.maxX - width - PipLayout.margin : area.minX + PipLayout.margin
         let frame = NSRect(x: x, y: area.maxY - height, width: width, height: height)

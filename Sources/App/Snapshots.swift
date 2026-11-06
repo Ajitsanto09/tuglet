@@ -40,6 +40,16 @@ enum Snapshots {
             snoozing.dragging = true; snoozing.stretch = 60; snoozing.armed = .snooze; snoozing.collapsed = true
             render(PipView(model: model, ui: snoozing), "pull-snooze", CGSize(width: 260, height: 200), dark: dark)
             render(MenuView(model: model), "menu", CGSize(width: 360, height: 560), dark: dark)
+            render(AvatarPicker(model: model).padding(16), "characters", CGSize(width: 330, height: 420), dark: dark)
+            let lineup = HStack(alignment: .top, spacing: 18) {
+                ForEach(["pip", "cat", "fox", "robot", "invader", "laptop", "coffee"], id: \.self) { id in
+                    VStack(spacing: -3) {
+                        Rectangle().fill(Color(red: 0.48, green: 0.35, blue: 0.18)).frame(width: 2, height: CGFloat(id.count * 6 % 30 + 18))
+                        AvatarView(avatar: Avatar.find(id)).frame(width: 64, height: 64)
+                    }
+                }
+            }
+            render(lineup, "lineup", CGSize(width: 600, height: 130), dark: dark)
         }
         try? FileManager.default.removeItem(at: file.url)
     }

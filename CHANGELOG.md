@@ -2,6 +2,20 @@
 
 All notable changes to Tuglet are recorded here. The version is `CFBundleShortVersionString` in `Resources/Info.plist`.
 
+## [0.3.0] - 2026-11-06
+
+First version of **characters**.
+
+### Added
+- **Choose your character** (Tuglet window or menu → Character): Pip the star, 12 animals (cat, dog, fox, panda, frog, monkey, owl, penguin, octopus, unicorn, bee, sloth) and 12 computer characters (robot, space invader, laptop, desktop, keyboard, mouse, floppy disk, joystick, bug, rocket, coffee, nerd face). The animals and computer characters use the Mac's built-in emoji.
+
+### Changed
+- **Livelier attention animation.** When a reminder becomes due, the character drops on its rope and bounces back, then swings hard with a quick "pop". While the reminder stays due, it gives a short shake every 45 seconds until you snooze or complete it. "Keep the character still" and macOS Reduce motion turn all movement off.
+- The character sits a little further from the screen edge so its swing isn't cut off.
+
+### Compatibility
+- Reminders and settings from 0.2.x load unchanged (the new setting defaults to Pip).
+
 ## [0.2.1] - 2026-11-06
 
 ### Fixed

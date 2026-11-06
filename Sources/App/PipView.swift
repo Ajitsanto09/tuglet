@@ -8,6 +8,10 @@ enum PipLayout {
     static let panelWidth: CGFloat = 276
     static let panelHeight: CGFloat = 170
     static let margin: CGFloat = 16
+    /// Space on each side of the character so a big swing isn't clipped by the window.
+    static let swingRoom: CGFloat = 40
+    /// Extra rope length used by the "drop" bounce.
+    static let bounce: CGFloat = 30
 }
 
 /// What the Pip window needs to know to size itself.
@@ -17,6 +21,8 @@ final class PipUI: ObservableObject {
     @Published var dragging = false
     @Published var collapsed = false
     @Published var armed: PullAction?
+    /// True while an attention animation plays (the window makes room for it).
+    @Published var swinging = false
 }
 
 struct PipView: View {
@@ -24,7 +30,8 @@ struct PipView: View {
     @ObservedObject var ui: PipUI
     @State private var angle = 0.0
     @State private var pinned: UUID?
-    @State private var swungFor: UUID?
+    @State private var drop: CGFloat = 0
+    @State private var scale: CGFloat = 1
     @State private var startY: CGFloat = 0
     /// Resets on end *and* on cancel (onEnded isn't called when macOS cancels a drag).
     @GestureState private var pressing = false
@@ -40,8 +47,8 @@ struct PipView: View {
             if showPanel { panel }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: Alignment(horizontal: alignment, vertical: .top))
-        .onAppear { swingIfNew() }
-        .onChange(of: current?.id) { _ in swingIfNew(); if current?.id != pinned { cancelDrag() } }
+        .task(id: current?.id) { await attention() } // restarts for each newly shown reminder
+        .onChange(of: current?.id) { _ in if current?.id != pinned { cancelDrag() } }
         .onChange(of: pressing) { if !$0 && ui.dragging { cancelDrag() } }
     }
 
@@ -51,9 +58,10 @@ struct PipView: View {
 
     private var hanging: some View {
         VStack(spacing: -3) {
-            Rectangle().fill(Color(red: 0.48, green: 0.35, blue: 0.18)).frame(width: 2, height: PipLayout.rope + ui.stretch)
+            Rectangle().fill(Color(red: 0.48, green: 0.35, blue: 0.18)).frame(width: 2, height: PipLayout.rope + ui.stretch + drop)
                 .shadow(color: .white.opacity(0.6), radius: 0.5)
-            PipArt().frame(width: PipLayout.pip, height: PipLayout.pip)
+            AvatarView(avatar: Avatar.find(settings.avatar)).frame(width: PipLayout.pip, height: PipLayout.pip)
+                .scaleEffect(scale, anchor: .top)
                 // Overlays don't change layout, so Pip never shifts while the label shows.
                 .overlay(alignment: .topTrailing) {
                     if !model.due.isEmpty {
@@ -83,6 +91,7 @@ struct PipView: View {
         }
         .frame(width: PipLayout.pip)
         .rotationEffect(.degrees(angle), anchor: .top)
+        .frame(width: PipLayout.pip + 2 * PipLayout.swingRoom)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(current == nil ? "Tuglet: a reminder is scheduled" : "Tuglet: \(model.due.count) reminder\(model.due.count == 1 ? "" : "s") due")
     }
@@ -115,21 +124,37 @@ struct PipView: View {
         pinned = nil
     }
 
-    /// A brief swing (under 5 s) the first time a reminder becomes due; never replayed.
-    private func swingIfNew() {
-        guard let r = current, !r.presented, swungFor != r.id else { return }
-        swungFor = r.id
-        ui.collapsed = false
-        NSAccessibility.post(element: NSApp as Any, notification: .announcementRequested,
-                             userInfo: [.announcement: "Tuglet: a reminder is due", .priority: NSAccessibilityPriorityLevel.medium.rawValue])
-        model.markPresented(r.id)
-        guard !reduceMotion else { return }
-        Task { @MainActor in
-            for a in [14.0, -11, 8, -5, 3, 0, 10, -7, 4, 0] {
-                guard !ui.dragging else { angle = 0; return }
-                withAnimation(.easeInOut(duration: 0.42)) { angle = a }
-                try? await Task.sleep(nanoseconds: 430_000_000)
-            }
+    /// Grabs attention when a reminder becomes due: a drop-and-bounce, a big swing, then a short
+    /// shake every 45 seconds while it stays due. Off with "Keep Pip still" or macOS Reduce motion.
+    private func attention() async {
+        guard let r = current else { return }
+        if !r.presented {
+            ui.collapsed = false
+            NSAccessibility.post(element: NSApp as Any, notification: .announcementRequested,
+                                 userInfo: [.announcement: "Tuglet: a reminder is due", .priority: NSAccessibilityPriorityLevel.medium.rawValue])
+            model.markPresented(r.id)
+            await wiggle([30, -27, 24, -20, 16, -12, 8, -4, 0], step: 0.2, pop: 1.3, dropBy: PipLayout.bounce)
+        }
+        while !Task.isCancelled {
+            do { try await Task.sleep(nanoseconds: 45_000_000_000) } catch { return }
+            guard model.current?.id == r.id else { return }
+            await wiggle([22, -20, 16, -12, 7, 0], step: 0.12, pop: 1.15, dropBy: 12)
+        }
+    }
+
+    private func wiggle(_ angles: [Double], step: Double, pop: CGFloat, dropBy: CGFloat) async {
+        guard !reduceMotion, !ui.dragging else { return }
+        ui.swinging = true
+        try? await Task.sleep(nanoseconds: 50_000_000) // let the window make room first
+        defer { ui.swinging = false; angle = 0; scale = 1; drop = 0 }
+        drop = dropBy
+        withAnimation(.interpolatingSpring(stiffness: 260, damping: 6)) { drop = 0 } // yo-yo bounce
+        withAnimation(.spring(response: 0.2, dampingFraction: 0.35)) { scale = pop }
+        for (i, a) in angles.enumerated() {
+            guard !ui.dragging, !Task.isCancelled else { return }
+            withAnimation(.easeInOut(duration: step)) { angle = a }
+            try? await Task.sleep(nanoseconds: UInt64(step * 1_000_000_000))
+            if i == 1 { withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { scale = 1 } }
         }
     }
 

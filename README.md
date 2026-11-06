@@ -1,6 +1,8 @@
 # Tuglet
 
-A little Mac app for personal reminders. **Pip**, a friendly star on a string, hangs from the top of your screen above every app, and swings when something is due.
+A little Mac app for personal reminders. **Pip**, a friendly star on a string (or a cat, fox, robot, laptop… your pick), hangs from the top of your screen above every app, and drops, swings and shakes when something is due.
+
+![Pip, a cat, a fox, a robot, a space invader, a laptop and a coffee cup hanging on ropes](docs/screenshots/lineup-light.png)
 
 - **Pull Pip a little** and let go: **snooze** (5 minutes by default).
 - **Pull Pip all the way down** and let go: **complete**. Undo is available for 10 seconds.
@@ -8,11 +10,11 @@ A little Mac app for personal reminders. **Pip**, a friendly star on a string, h
 
 Reminders stay on your Mac. No account, no internet connection, no tracking.
 
-> 🚧 **First version (0.2.x).** This is the first iteration of the Mac app. More updates are coming soon: editing, repeating reminders, more characters, and optional Slack/GitHub notifications. Feedback is very welcome.
+> 🚧 **Early version (0.3.0).** This is an early iteration of the Mac app, now with 25 characters. More updates are coming soon: editing, repeating reminders, custom-drawn characters, and optional Slack/GitHub notifications. Feedback is very welcome.
 
-| Reminder due | Pulling to complete | Menu bar |
+| Reminder due | Pulling to complete | Pick a character |
 | --- | --- | --- |
-| ![Pip hanging with a due card and Snooze/Complete buttons](docs/screenshots/due-light.png) | ![Pip stretched down with "Let go to complete"](docs/screenshots/pull-complete-dark.png) | ![The Tuglet menu with due, new reminder and settings](docs/screenshots/menu-light.png) |
+| ![Pip hanging with a due card and Snooze/Complete buttons](docs/screenshots/due-light.png) | ![Pip stretched down with "Let go to complete"](docs/screenshots/pull-complete-dark.png) | ![The character picker: Pip, animals and computer characters](docs/screenshots/characters-light.png) |
 
 *Images are rendered from the app's real views with made-up reminders.*
 
@@ -34,4 +36,4 @@ Tuglet began as a Chrome extension (v0.1.0). That version is **retired**: Pip co
 
 ## License
 
-MIT. Pip is original artwork released under the same license.
+MIT. Pip is original artwork released under the same license. The other characters are drawn by macOS's built-in Apple Color Emoji font on your Mac; no emoji images are included in this project.

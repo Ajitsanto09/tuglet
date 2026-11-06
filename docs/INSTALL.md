@@ -1,6 +1,6 @@
 # Install and use Tuglet on your Mac
 
-> **This is the first version of Tuglet (0.2.x).** It does the basics: reminders, Pip, snooze and complete. More updates are coming soon. Ideas and problems are very welcome; see "Tell us what you think" at the end.
+> **This is an early version of Tuglet (0.3.0).** It does the basics, reminders, snooze and complete, and now lets you pick your character. More updates are coming soon. Ideas and problems are very welcome; see "Tell us what you think" at the end.
 
 You don't need to know how to code. This takes about 5 minutes.
 
@@ -11,13 +11,13 @@ You don't need to know how to code. This takes about 5 minutes.
 ## 1. Download
 
 1. Open **https://github.com/Ajitsanto09/tuglet/releases/latest**. The repository is private, so sign in to GitHub with an account that has access. If you get a "404" page, ask the maintainer to add you.
-2. Under **Assets**, click the file named **`Tuglet-<version>-mac.zip`** (for example `Tuglet-0.2.1-mac.zip`).
+2. Under **Assets**, click the file named **`Tuglet-<version>-mac.zip`** (for example `Tuglet-0.3.0-mac.zip`).
 
    ⚠️ Don't use "Source code (zip)" or the green **Code → Download ZIP** button. Those are the project's code, not the app.
 
 3. Your Mac usually unzips it for you. In **Downloads** you should now see **Tuglet** (an app with a star icon). If you only see the `.zip`, double-click it.
 
-*Optional, for the careful:* check the download wasn't damaged. Open **Terminal** and run `shasum -a 256 ~/Downloads/Tuglet-0.2.1-mac.zip` (use the version you downloaded). The result should match the line in the release's `SHA256SUMS` file.
+*Optional, for the careful:* check the download wasn't damaged. Open **Terminal** and run `shasum -a 256 ~/Downloads/Tuglet-0.3.0-mac.zip` (use the version you downloaded). The result should match the line in the release's `SHA256SUMS` file.
 
 ## 2. Move it to Applications
 
@@ -81,9 +81,22 @@ As soon as you have a reminder, **Pip**, a little star on a string, hangs from t
 
 When a reminder is **due**:
 
-- Pip **swings** for a few seconds to catch your eye, then stays still.
+- Pip **drops** on its rope, bounces back and **swings hard** for a couple of seconds to catch your eye.
+- Until you snooze or complete it, Pip gives a **little shake every 45 seconds**, so it's hard to miss.
 - A small **number** on Pip shows how many reminders are due.
 - A card under Pip shows the reminder and buttons.
+
+### Pick your character
+
+Don't fancy a star? Open the Tuglet window (or ☆ menu) → **Character**, and click one:
+
+- **Classic:** Pip the star
+- **Animals:** cat, dog, fox, panda, frog, monkey, owl, penguin, octopus, unicorn, bee, sloth
+- **Computer:** robot, space invader, laptop, desktop, keyboard, mouse, floppy disk, joystick, bug, rocket, coffee, nerd face
+
+The change is instant. Everything works the same whichever character you pick; this guide calls it "Pip".
+
+![The character picker](screenshots/characters-light.png)
 
 ### Snooze or complete: pull Pip
 
@@ -120,7 +133,7 @@ Open the Tuglet window or menu. Under **Coming up**, click **Delete**, then **Co
 - **Snooze for:** 5, 10, 15 or 30 minutes.
 - **Pip hangs on the:** right or left side of the screen.
 - **Show the reminder text on Pip:** turn this off before sharing your screen in meetings. Pip then only says "A reminder is due".
-- **Keep Pip still:** no swinging. Tuglet also follows your Mac's *Reduce motion* setting (System Settings → Accessibility → Display).
+- **Keep the character still:** no dropping, swinging or shaking (Pip still shows the due number and card). Tuglet also follows your Mac's *Reduce motion* setting (System Settings → Accessibility → Display).
 - **Open Tuglet when I log in.**
 
 ### When Pip goes away
@@ -164,11 +177,12 @@ Your reminders are kept. They're stored separately from the app.
 | Pip doesn't appear | Pip only shows when you have reminders. Add one, or try the 1-minute demo. |
 | Reminder came late | Your Mac was asleep or Tuglet wasn't running. Turn on "Open Tuglet when I log in". |
 | Pip is in the way | Click **Hide**, move Pip to the left side in Settings, or snooze. |
+| The shaking is too much | Settings → **Keep the character still**, or snooze the reminder. |
 | "Couldn't save…" message | Nothing was changed. Try again. If it keeps happening, check your disk isn't full. |
 | "Saved by a newer Tuglet" message | You opened an older version after a newer one. Download the latest release. |
 
 ## Tell us what you think
 
-This is the **first iteration**, and it will improve with your feedback. Planned next: editing reminders, repeating reminders, more characters, and optional Slack and GitHub notifications (see [ROADMAP.md](ROADMAP.md)).
+This is the **first iteration**, and it will improve with your feedback. Planned next: editing reminders, repeating reminders, custom-drawn characters, and optional Slack and GitHub notifications (see [ROADMAP.md](ROADMAP.md)).
 
 Report problems or ideas as an issue in the GitHub repository (**Issues → New issue**). Use made-up reminder text in screenshots, never real work details.

@@ -36,6 +36,7 @@ struct MenuView: View {
                 dueSection
                 addSection
                 upcomingSection
+                section("Character") { AvatarPicker(model: model) }
                 settingsSection
                 DisclosureGroup("How to use Tuglet", isExpanded: $showHelp) { help }
                 HStack {
@@ -130,7 +131,7 @@ struct MenuView: View {
             .pickerStyle(.segmented)
             Toggle("Show the reminder text on Pip (turn off when sharing your screen)",
                    isOn: Binding(get: { settings.showTitleOnPip }, set: { v in model.update { $0.showTitleOnPip = v } }))
-            Toggle("Keep Pip still (no swinging)", isOn: Binding(get: { settings.pauseAnimation }, set: { v in model.update { $0.pauseAnimation = v } }))
+            Toggle("Keep the character still (no swinging or shaking)", isOn: Binding(get: { settings.pauseAnimation }, set: { v in model.update { $0.pauseAnimation = v } }))
             Toggle("Open Tuglet when I log in", isOn: Binding(get: { model.opensAtLogin }, set: { model.setOpensAtLogin($0) }))
         }
     }
@@ -138,12 +139,13 @@ struct MenuView: View {
     private var help: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("1. Add a reminder above. Pip appears at the top of your screen and waits.")
-            Text("2. When it's due, Pip swings for a few seconds and shows a number.")
+            Text("2. When it's due, Pip drops, swings and shakes to get your attention, and shows a number. It gives a little shake every 45 seconds until you act.")
             Text("3. Pull Pip **down a little** and let go to **snooze**.")
             Text("4. Pull Pip **all the way down** (about the height of Pip twice) and let go to **complete**. A label tells you which will happen before you let go.")
             Text("5. Changed your mind? Move back up before letting go.")
             Text("6. Prefer clicking? Use the **Snooze** and **Complete** buttons next to Pip or here.")
             Text("7. Completed by mistake? Click **Undo** within 10 seconds.")
+            Text("Want a different character? Pick a cat, robot, laptop and more under **Character**.")
             Text("Reminders stay on this Mac only. Tuglet must be running to remind you; turn on “Open Tuglet when I log in”.")
                 .foregroundColor(.secondary)
         }

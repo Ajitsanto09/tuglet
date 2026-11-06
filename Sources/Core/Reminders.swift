@@ -43,7 +43,20 @@ public struct Settings: Codable, Equatable {
     public var pauseAnimation = false
     /// Off = Pip shows "A reminder is due" (safer when sharing your screen).
     public var showTitleOnPip = true
+    /// Which character hangs on the rope (an ID from the app's avatar list; unknown IDs fall back to Pip).
+    public var avatar = "pip"
     public init() {}
+
+    /// Missing keys use defaults, so files saved by older versions keep loading as settings are added.
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let d = Settings()
+        snoozeMinutes = try c.decodeIfPresent(Int.self, forKey: .snoozeMinutes) ?? d.snoozeMinutes
+        side = try c.decodeIfPresent(Side.self, forKey: .side) ?? d.side
+        pauseAnimation = try c.decodeIfPresent(Bool.self, forKey: .pauseAnimation) ?? d.pauseAnimation
+        showTitleOnPip = try c.decodeIfPresent(Bool.self, forKey: .showTitleOnPip) ?? d.showTitleOnPip
+        avatar = try c.decodeIfPresent(String.self, forKey: .avatar) ?? d.avatar
+    }
 }
 
 public enum ReminderError: Error, Equatable {

@@ -1,6 +1,6 @@
 # Roadmap
 
-**Tuglet for Mac 0.2.0 is the first iteration**: manual one-time reminders with Pip. More updates are coming. Nothing below is built yet, and the app has no connections, accounts or tokens for any of it. Each item ships as its own release, with tests, a privacy review, documentation and opt-in consent.
+**Tuglet for Mac 0.3.0 is an early iteration**: manual one-time reminders, with Pip plus 24 emoji characters. More updates are coming. Nothing below is built yet, and the app has no connections, accounts or tokens for any of it. Each item ships as its own release, with tests, a privacy review, documentation and opt-in consent.
 
 ## Next up (small, from pilot feedback)
 
@@ -13,7 +13,7 @@
 
 ## Later
 
-1. **Bundled characters and visual preferences.**
+1. **Custom-drawn characters** with their own poses (idle, due, pulling, done), plus per-character animations. The emoji characters in 0.3.0 are the first step.
 2. **GitHub pull-request review notifications** (narrow scope).
 3. **Slack notifications** for chosen cases, once workspace, OAuth and event-access requirements are known.
 
@@ -27,7 +27,7 @@ Completing a Tuglet reminder only acknowledges Tuglet's copy. It must never mark
 
 ## Characters
 
-- A packaged character definition: ID, display name, original or licensed assets, accessible description, anchor point, and states (idle, due, pulling, snoozed, completed, static). Today's `Sources/App/PipArt.swift` is the starting point.
+- A packaged character definition: ID, display name, original or licensed assets, accessible description, anchor point, and states (idle, due, pulling, snoozed, completed, static). Today's starting point is `Sources/App/Avatars.swift` (the list and emoji rendering) and `Sources/App/PipArt.swift` (Pip's drawing).
 - Gesture thresholds, motion settings and button alternatives stay the same for every character.
 - Asset packs are declarative data and images only: no scripts, arbitrary HTML/SVG scripting, remote CSS or network URLs. User uploads (if ever) would need size/type validation and sanitization. Attribution and licensing documented per character.
 

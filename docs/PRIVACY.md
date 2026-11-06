@@ -1,6 +1,6 @@
 # Tuglet privacy
 
-Applies to Tuglet for Mac 0.2.0. Effective 6 November 2026.
+Applies to Tuglet for Mac 0.3.0. Effective 6 November 2026.
 
 ## Summary
 
@@ -12,7 +12,7 @@ One file: `~/Library/Application Support/Tuglet/reminders.json`, readable by you
 
 - Your reminders: the text you type (which may include personal or work details), due time, status (scheduled, due, snoozed, completed) and when it was created or completed.
 - Up to the **100 most recent completed** reminders. Older completed ones are deleted automatically.
-- Your settings: snooze length, which side Pip hangs on, whether Pip shows reminder text, and whether Pip stays still.
+- Your settings: snooze length, which side Pip hangs on, which character you picked, whether it shows reminder text, and whether it stays still.
 
 "Open at login" is stored by macOS in its Login Items list, not by Tuglet.
 

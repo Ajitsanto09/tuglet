@@ -1,4 +1,4 @@
-# Acceptance record: Tuglet for Mac 0.2.x
+# Acceptance record: Tuglet for Mac 0.3.0
 
 Recorded 6 November 2026 on macOS 15.7.9 (Apple silicon), Swift 6.2.4 (Command Line Tools 26.3).
 
@@ -24,7 +24,12 @@ Recorded 6 November 2026 on macOS 15.7.9 (Apple silicon), Swift 6.2.4 (Command L
 | 0.2.1: launch with existing reminders stays quiet (Pip only) | Pass | Only the Pip panel on screen |
 | 0.2.1: double-click while running reopens the window | Pass | `open` on the running app showed the window |
 | 0.2.1: clicking idle Pip opens the window | Pass | Posted click on Pip |
-| Rendered views (light and dark): due card, pulling labels, menu | Pass | `docs/screenshots/` from `Tuglet --snapshots` |
+| 0.3.0: settings files from 0.2.x (no character setting) still load | Pass | Self-check "0.2.x settings load with default avatar" |
+| 0.3.0: chosen character (cat, robot) is used and saved | Pass | Live runs with `avatar` set; data file kept it |
+| 0.3.0: due animation makes room (window 280 → 326 pt during the swing) and settles back | Pass | Window sampled during and after the swing |
+| 0.3.0: repeat shake while due | Pass | Window grew at about 47 s after launch and settled 1 s later |
+| 0.3.0: pull still works at the new position (130 pt → completed) | Pass | Posted pointer events |
+| Rendered views (light and dark): due card, pulling labels, menu, characters | Pass | `docs/screenshots/` from `Tuglet --snapshots` |
 
 Found by a teammate after 0.2.0 shipped and fixed in 0.2.1: double-clicking appeared to do nothing (menu bar icon hidden behind the notch, no window). Bugs found and fixed during these checks: the "Let go to…" label shifted Pip and was clipped in the narrow idle window; card buttons were truncated; pulls were mismeasured when the window resized; a cancelled drag could leave Pip stuck in dragging mode.
 
@@ -35,7 +40,7 @@ Run on at least one other Mac, ideally an Intel Mac and macOS 13 or 14, using th
 1. **First open:** download from Releases, move to Applications, double-click → blocked → System Settings → Privacy & Security → **Open Anyway** works as INSTALL.md describes. On macOS 13/14, right-click → Open.
 2. **Menu bar:** the ☆ appears; it shows ★ and a number when due; the menu opens and every section works (add, shortcuts, demo, delete with confirm, settings).
 3. **Pip over everything:** visible above a full-screen app, on every Space, and over Slack, a browser and an editor. Clicks beside Pip reach the app underneath.
-4. **Swing:** brief swing on a new due reminder; none after relaunch or when snoozed reminders are still due; none with "Keep Pip still" or macOS Reduce motion.
+4. **Animation:** drop, bounce and swing on a new due reminder; a short shake every 45 s while due; none with "Keep the character still" or macOS Reduce motion; no shake mid-pull. Try every character on light and dark wallpapers.
 5. **Buttons:** Snooze, Complete, Hide (card folds, reminder stays due, clicking Pip reopens it), Undo within 10 s, and Undo from the menu.
 6. **Sleep:** reminder due during sleep → due on wake. Quit Tuglet past a due time → due on next launch.
 7. **Open at login:** turn it on, log out and in, and Tuglet starts. If macOS refuses, the message points to Login Items.

@@ -43,8 +43,10 @@ Sources/App/Model.swift        Owns state on the main thread. Every change is sa
                                clock changes and launch. Handles open at login (SMAppService).
 Sources/App/PipWindow.swift    Borderless floating panel above all apps and Spaces, sized to Pip
                                so the rest of the screen stays clickable.
-Sources/App/PipView.swift      Rope, Pip, due badge, pull gesture, the brief swing, and the card.
-Sources/App/PipArt.swift       Pip's drawing. Replace this view to change the character.
+Sources/App/PipView.swift      Rope, character, due badge, pull gesture, attention animation (drop, swing,
+                               45-second shake) and the card.
+Sources/App/Avatars.swift      Character list (Pip + emoji animals/computer), how each is drawn, and the picker.
+Sources/App/PipArt.swift       Pip's own drawing.
 Sources/App/MenuView.swift     Menu bar window: due, add, coming up, settings, help.
 Sources/App/Snapshots.swift    Renders the README images.
 Checks/main.swift              Self-checks for Sources/Core.
