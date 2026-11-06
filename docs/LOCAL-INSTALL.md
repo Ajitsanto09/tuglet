@@ -6,7 +6,9 @@ This is a *trusted pilot* installation using Chrome's Developer mode. It is not 
 
 **You need:** Google Chrome 120 or newer (check at `chrome://version`) and the file **`tuglet-0.1.0.zip`**.
 
-> Until the maintainer publishes a GitHub Release, get the ZIP and its `SHA256SUMS` file directly from them. On a GitHub Release page, download the file named `tuglet-<version>.zip`, **not** "Source code (zip)", which is not an installable extension.
+> **Download:** https://github.com/Ajitsanto09/tuglet/releases/latest (private repository: sign in with an account that has access). Under **Assets**, download **`tuglet-0.1.0.zip`** and `SHA256SUMS`.
+>
+> Do **not** use the green **Code → Download ZIP** button or the "Source code (zip)" asset. Those contain source code, not the extension, and Chrome will refuse to load them.
 
 ## 1. Check the download (optional, recommended)
 
@@ -16,7 +18,7 @@ Compare the file's fingerprint with the one in `SHA256SUMS`:
 - **Windows** (PowerShell): `Get-FileHash $HOME\Downloads\tuglet-0.1.0.zip -Algorithm SHA256`
 - **Linux**: `sha256sum ~/Downloads/tuglet-0.1.0.zip`
 
-The long code must match exactly. For 0.1.0 built on 6 Nov 2026 it is listed in `SHA256SUMS`. A match shows the file was not damaged or changed; it does not by itself prove who made it, so still get it from a trusted place.
+The long code must match exactly. For 0.1.0 it is `96b991880670e2983f66ba9bcabb0c78562e57aac0d8c9e7f3345fd163179dc6`. A match shows the file was not damaged or changed; it does not by itself prove who made it, so still get it from a trusted place.
 
 ## 2. Unzip into a folder you will keep
 
@@ -81,6 +83,7 @@ Reminders belong to one Chrome profile on one computer; other profiles and peopl
 | Problem | What to do |
 | --- | --- |
 | "Manifest file is missing or unreadable" | You picked the wrong folder. Choose the folder that directly contains `manifest.json` (often one level deeper). |
+| "Could not load background script" / missing icon / folder named `tuglet-main` | You downloaded the source code (Code → Download ZIP). Download `tuglet-0.1.0.zip` from the Releases page instead. |
 | Developer mode / Load unpacked is blocked | Your browser is managed. Ask IT for an approved installation route. |
 | Pip doesn't appear | Pip can't appear on `chrome://` pages, the Chrome Web Store, PDFs, local files, or sites you haven't enabled. Use the toolbar popup and badge there. "Show on this page" lasts only until reload. |
 | Pip vanished from a site | Access was turned off (in Tuglet Settings or Chrome's extension settings). Re-enable it deliberately from the popup. |

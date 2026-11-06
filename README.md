@@ -14,11 +14,11 @@ Reminders stay on your computer. No account, no server, no analytics, no network
 
 Screenshots are of the real extension with synthetic data, captured by `tests/e2e/screenshots.spec.ts`.
 
-> Tuglet is a working name. Status: **0.1.0 local pilot.** Not yet on the Chrome Web Store.
+> Tuglet is a working name. Status: **0.1.0 pilot, [released on GitHub](https://github.com/Ajitsanto09/tuglet/releases/tag/v0.1.0).** Not on the Chrome Web Store.
 
 ## Install
 
-- **Teammates (no coding):** follow [docs/LOCAL-INSTALL.md](docs/LOCAL-INSTALL.md). You need the release file `tuglet-0.1.0.zip` and Chrome 120 or newer.
+- **Teammates (no coding):** download **`tuglet-0.1.0.zip` from [Releases](https://github.com/Ajitsanto09/tuglet/releases/latest)** (not the green Code → Download ZIP button, which is source code) and follow [docs/LOCAL-INSTALL.md](docs/LOCAL-INSTALL.md). Needs Chrome 120 or newer.
 - **Developers:** see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 Tested with Chromium 156.0.8078.4 (automated suite) and Google Chrome 157.0.8103.38 on macOS 15.7 (smoke test). See [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md).
