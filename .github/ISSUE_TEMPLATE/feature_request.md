@@ -8,4 +8,4 @@ labels: enhancement
 
 **Why does it help your work?**
 
-**Would it need new permissions or send data anywhere?** (for example Slack or GitHub access)
+**Would it need to connect to anything?** (for example Slack or GitHub)

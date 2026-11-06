@@ -1,13 +1,12 @@
 ## What changed
 
 ## How it was tested
-- [ ] `npm run lint && npm run typecheck && npm test -- --run`
-- [ ] `npm run build && npm run test:e2e`
-- [ ] Tried it by hand in Chrome (version: ) on (OS: )
+- [ ] `scripts/check.sh` passes
+- [ ] `scripts/build.sh` and tried the app (macOS version: )
+- [ ] Pull a little = snooze, pull fully = complete, buttons and Undo still work
 
-## Permissions and data
-- [ ] No change to `src/manifest.json` permissions, host access, or what is stored/sent
-- [ ] If changed: explained why, updated docs/PERMISSIONS.md, docs/PRIVACY.md and CHANGELOG.md
+## Data and privacy
+- [ ] No change to what Tuglet stores or sends (it sends nothing)
+- [ ] If changed: explained why, updated docs/PRIVACY.md and CHANGELOG.md
 
-## Screenshots
-Use synthetic reminder titles only (no real work data).
+Use synthetic reminder titles in screenshots.

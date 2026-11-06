@@ -15,9 +15,6 @@ labels: bug
 2.
 
 **Versions**
-- Tuglet version (chrome://extensions):
-- Chrome version (chrome://version):
-- Operating system:
-- Installed from: release ZIP / source build / Chrome Web Store
-
-**Page type** (ordinary website, chrome:// page, PDF, etc.):
+- Tuglet version (shown at the top of the Tuglet menu):
+- macOS version ( → About This Mac):
+- Mac type: Apple silicon / Intel

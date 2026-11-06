@@ -1,56 +1,37 @@
 # Tuglet
 
-Personal reminders for Chrome, with a small friendly star called **Pip** hanging from the top of the web pages you choose.
+A little Mac app for personal reminders. **Pip**, a friendly star on a string, hangs from the top of your screen above every app, and swings when something is due.
 
-- **Pull Pip a little** (24–119 px) and let go: **snooze** (5 minutes by default).
-- **Pull Pip all the way** (120 px or more) and let go: **complete**. Undo is available for 10 seconds.
-- Prefer not to drag? **Snooze** and **Complete** buttons sit right next to Pip, and everything works by keyboard.
+- **Pull Pip a little** and let go: **snooze** (5 minutes by default).
+- **Pull Pip all the way down** and let go: **complete**. Undo is available for 10 seconds.
+- Prefer clicking? **Snooze** and **Complete** buttons sit right under Pip and in the menu bar.
 
-Reminders stay on your computer. No account, no server, no analytics, no network requests.
+Reminders stay on your Mac. No account, no internet connection, no tracking.
 
-| Reminder due (light) | Pulling to complete (dark) |
-| --- | --- |
-| ![Pip hanging at the top right of a page with a "A reminder is due" panel](docs/screenshots/due-light.png) | ![Pip stretched down with a "Release to complete" label](docs/screenshots/pull-complete-dark.png) |
+> 🚧 **First version (0.2.0).** This is the first iteration of the Mac app. More updates are coming soon: editing, repeating reminders, more characters, and optional Slack/GitHub notifications. Feedback is very welcome.
 
-Screenshots are of the real extension with synthetic data, captured by `tests/e2e/screenshots.spec.ts`.
+| Reminder due | Pulling to complete | Menu bar |
+| --- | --- | --- |
+| ![Pip hanging with a due card and Snooze/Complete buttons](docs/screenshots/due-light.png) | ![Pip stretched down with "Let go to complete"](docs/screenshots/pull-complete-dark.png) | ![The Tuglet menu with due, new reminder and settings](docs/screenshots/menu-light.png) |
 
-> Tuglet is a working name. Status: **0.1.0 pilot, [released on GitHub](https://github.com/Ajitsanto09/tuglet/releases/tag/v0.1.0).** Not on the Chrome Web Store.
+*Images are rendered from the app's real views with made-up reminders.*
 
-## Install
+## Get it
 
-- **Teammates (no coding):** download **`tuglet-0.1.0.zip` from [Releases](https://github.com/Ajitsanto09/tuglet/releases/latest)** (not the green Code → Download ZIP button, which is source code) and follow [docs/LOCAL-INSTALL.md](docs/LOCAL-INSTALL.md). Needs Chrome 120 or newer.
-- **Developers:** see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+**→ [Download and install guide for teammates](docs/INSTALL.md)**. It covers the download, the one-time **Open Anyway** step, and how to use Pip.
 
-Tested with Chromium 156.0.8078.4 (automated suite) and Google Chrome 157.0.8103.38 on macOS 15.7 (smoke test). See [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md).
+Quick version: download **`Tuglet-x.y.z-mac.zip`** from **[Releases](https://github.com/Ajitsanto09/tuglet/releases/latest)** (not the green Code button), move Tuglet to Applications, open it, and approve it once in **System Settings → Privacy & Security → Open Anyway**. Needs macOS 13 or newer, on Apple silicon or Intel.
 
-## How it works
+Why the extra step? The app is signed for free instead of through Apple's paid developer program, so macOS asks you to approve it once. Details are in the [install guide](docs/INSTALL.md#3-the-one-time-open-anyway-step-why-its-needed).
 
-1. Click the Tuglet toolbar icon and add a reminder (or try the 1-minute demo).
-2. On a normal website, choose **Show on this page** (temporary) or **Always allow on this site**. You can skip this: the toolbar list and badge always work.
-3. When a reminder is due, Pip swings for a few seconds, then waits with a small "!" marker until you act.
+## Where it came from
 
-Pip appears inside the web page, just below Chrome's toolbar. Chrome does not let extensions draw over the address bar or tabs, and Pip cannot appear on `chrome://` pages, the Chrome Web Store, PDFs or local files; use the toolbar popup there.
-
-## Permissions at a glance
-
-| Permission | Why |
-| --- | --- |
-| `storage` | Save your reminders and settings on this device. |
-| `alarms` | Wake Tuglet when a reminder is due. |
-| `scripting` + `activeTab` | Draw Pip on a page, only after you click a Tuglet button. |
-| Site access (optional, one site at a time) | Show Pip automatically on a site you chose "Always allow" for. |
-| `notifications` (optional) | Silent system notifications, only if you turn them on. |
-
-Details: [docs/PERMISSIONS.md](docs/PERMISSIONS.md) · Privacy: [docs/PRIVACY.md](docs/PRIVACY.md)
-
-## Integrations
-
-Slack, GitHub review notifications, extra characters and AI features are **not** in this version and the extension requests no access for them. See [docs/ROADMAP.md](docs/ROADMAP.md).
+Tuglet began as a Chrome extension (v0.1.0). That version is **retired**: Pip could only appear inside web pages. The Mac app shows Pip over everything. The extension's code remains in git history at tag `v0.1.0`.
 
 ## Project documents
 
-[Local install](docs/LOCAL-INSTALL.md) · [Development](docs/DEVELOPMENT.md) · [Publishing](docs/PUBLISHING.md) · [Store listing draft](docs/STORE-LISTING.md) · [Acceptance](docs/ACCEPTANCE.md) · [Roadmap](docs/ROADMAP.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
+[Install and use](docs/INSTALL.md) · [Development](docs/DEVELOPMENT.md) · [Publishing a release](docs/PUBLISHING.md) · [Privacy](docs/PRIVACY.md) · [Acceptance checks](docs/ACCEPTANCE.md) · [Roadmap](docs/ROADMAP.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
 ## License
 
-MIT. Pip is original artwork released under the same license. Bundled React is MIT licensed; see `THIRD_PARTY_NOTICES.txt` in the package.
+MIT. Pip is original artwork released under the same license.

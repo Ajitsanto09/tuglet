@@ -16,7 +16,7 @@ What to expect: acknowledgement within 5 working days, a fix or mitigation plan 
 
 ## Scope and design notes
 
-- No network access, backend or credentials exist in this version.
-- Pages only receive generic due information unless the user opts in per site; the page-mounted UI is not treated as a secret store.
-- All messages from pages are validated against a strict allowlist; administration commands are accepted only from the extension's own pages.
-- Reminder data in `chrome.storage.local` is restricted to trusted extension contexts but is not encrypted.
+- The Mac app has no network access, backend, credentials or special macOS permissions.
+- Reminder data is a JSON file in the user's Library folder; it is not encrypted.
+- Releases are ad-hoc signed (not notarized). Verify downloads against `SHA256SUMS` and only download from the repository's Releases page.
+- The retired Chrome extension (v0.1.0) is no longer supported.
