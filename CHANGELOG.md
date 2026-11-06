@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Tuglet are recorded here. Versions follow the `version` in `manifest.json`.
+All notable changes to Tuglet are recorded here. Versions follow the `version` in `src/manifest.json`.
 
 ## [0.1.0] - 2026-11-06
 

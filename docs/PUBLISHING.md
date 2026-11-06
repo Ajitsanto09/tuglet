@@ -27,7 +27,7 @@ Replace `OWNER`. Use `--public` only if you decided the project should be public
 
 ## 2. Make a GitHub Release (prebuilt ZIP for teammates)
 
-1. Update `version` in **both** `package.json` and `manifest.json` (every distributed update needs a higher version) and add a `## [x.y.z]` section to CHANGELOG.md, including any permission or data changes.
+1. Update `version` in **both** `package.json` and `src/manifest.json` (every distributed update needs a higher version) and add a `## [x.y.z]` section to CHANGELOG.md, including any permission or data changes.
 2. Run the full check from a clean tree:
    ```bash
    npm ci && npm run lint && npm run typecheck && npm test -- --run && npm run build && npm run test:e2e && npm run package && npm run verify:package

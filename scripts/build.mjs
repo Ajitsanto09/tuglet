@@ -5,8 +5,9 @@ import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 const watch = process.argv.includes('--watch');
 const out = 'dist';
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-const manifest = JSON.parse(await readFile('manifest.json', 'utf8'));
-if (manifest.version !== pkg.version) throw new Error(`manifest.json version ${manifest.version} != package.json ${pkg.version}`);
+// Kept in src/ (not the repo root) so a source-code download can't be mistaken for the built extension.
+const manifest = JSON.parse(await readFile('src/manifest.json', 'utf8'));
+if (manifest.version !== pkg.version) throw new Error(`src/manifest.json version ${manifest.version} != package.json ${pkg.version}`);
 
 await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });

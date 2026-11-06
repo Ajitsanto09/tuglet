@@ -14,7 +14,7 @@ npm run package && npm run verify:package   # if you touched build, manifest or 
 ## Ground rules
 
 - **Synthetic data only** in tests, screenshots and issues (e.g. "Review the checkout mockup"). No real names, internal URLs or work data.
-- **Permission changes need review.** Any change to `manifest.json` permissions, host access, storage contents or network behavior must explain why in the PR and update docs/PERMISSIONS.md, docs/PRIVACY.md and CHANGELOG.md. `npm run verify:package` enforces the current permission policy and must be updated deliberately.
+- **Permission changes need review.** Any change to `src/manifest.json` permissions, host access, storage contents or network behavior must explain why in the PR and update docs/PERMISSIONS.md, docs/PRIVACY.md and CHANGELOG.md. `npm run verify:package` enforces the current permission policy and must be updated deliberately.
 - **No remote code**, `eval`, inline scripts, CDN assets or analytics.
 - **Keep the worker the only writer** of reminder state; pages send narrow, validated commands.
 - **Accessibility:** every drag action needs a button/keyboard path; visible focus; respect reduced motion.
